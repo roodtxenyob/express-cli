@@ -5,9 +5,11 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import nunjucks from 'nunjucks';
 import indexRouter from './routes/index';
-import usersRouter from './routes/users';
+import expressWS from 'express-ws';
 
 var app = express();
+
+expressWS(app);
 
 app.set('view engine', 'html');
 nunjucks.configure(path.join(__dirname, 'views'), {
@@ -27,7 +29,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req: express.Request, res: express.Response, next: express.NextFunction)  {

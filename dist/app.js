@@ -10,8 +10,9 @@ var cookie_parser_1 = __importDefault(require("cookie-parser"));
 var morgan_1 = __importDefault(require("morgan"));
 var nunjucks_1 = __importDefault(require("nunjucks"));
 var index_1 = __importDefault(require("./routes/index"));
-var users_1 = __importDefault(require("./routes/users"));
+var express_ws_1 = __importDefault(require("express-ws"));
 var app = express_1.default();
+express_ws_1.default(app);
 app.set('view engine', 'html');
 nunjucks_1.default.configure(path_1.default.join(__dirname, 'views'), {
     autoescape: true,
@@ -27,7 +28,6 @@ app.use(express_1.default.urlencoded({ extended: false }));
 app.use(cookie_parser_1.default());
 app.use(express_1.default.static(path_1.default.join(__dirname, 'public')));
 app.use('/', index_1.default);
-app.use('/users', users_1.default);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(http_errors_1.default(404));
